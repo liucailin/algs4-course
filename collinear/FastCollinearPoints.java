@@ -8,6 +8,9 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class FastCollinearPoints {
 
     private LineSegment[] lineSegments;
@@ -18,6 +21,25 @@ public class FastCollinearPoints {
             throw new IllegalArgumentException();
         }
         int n = points.length;
+        ArrayList<LineSegment> lineSegmentArrayList = new ArrayList<>();
+        for (int i = 0; i < n - 1; i++) {
+            Point p = points[i];
+            Arrays.sort(points, i+1, n, p.slopeOrder());
+            Point q = points[i+1];
+            double slop = p.slopeTo(q);
+            int j = i + 2;
+            for (; j < n; j++) {
+                if (p.slopeTo(points[j]) != slop) {
+                    break;
+                }
+            }
+            if (j - i >= 4) {
+                LineSegment lineSegment = new LineSegment(p, points[j-1]);
+                lineSegmentArrayList.add(lineSegment);
+            }
+        }
+        lineSegments = new LineSegment[lineSegmentArrayList.size()];
+        lineSegments = lineSegmentArrayList.toArray(lineSegments);
     }
 
     public int numberOfSegments() { // the number of line segments

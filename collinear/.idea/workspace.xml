@@ -5,14 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c1e4f978-b3bd-4ae1-84e9-9e1170bce808" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/BruteCollinearPoints.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FastCollinearPoints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithms, Part I.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithms, Part I.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BruteCollinearPoints.class" beforeDir="false" afterPath="$PROJECT_DIR$/BruteCollinearPoints.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BruteCollinearPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/BruteCollinearPoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FastCollinearPoints.class" beforeDir="false" afterPath="$PROJECT_DIR$/FastCollinearPoints.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FastCollinearPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/FastCollinearPoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LineSegment.class" beforeDir="false" afterPath="$PROJECT_DIR$/LineSegment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Point$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Point$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Point$SlopOrder.class" beforeDir="false" afterPath="$PROJECT_DIR$/Point$SlopOrder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Point.class" beforeDir="false" afterPath="$PROJECT_DIR$/Point.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/Point.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../percolation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../percolation/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../percolation/Percolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../percolation/Percolation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,17 +92,35 @@
     <option name="showModules" value="false" />
     <option name="sortByType" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "F:/course/cs/algs4-course/collinear",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/course/cs/algs4-course/collinear&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager" selected="Application.BruteCollinearPoints">
+    <configuration name="BruteCollinearPoints" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="BruteCollinearPoints" />
+      <module name="Algorithms, Part I" />
+      <option name="PROGRAM_PARAMETERS" value="input6.txt" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FastCollinearPoints" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="FastCollinearPoints" />
+      <module name="Algorithms, Part I" />
+      <option name="PROGRAM_PARAMETERS" value="input8.txt" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -109,6 +129,7 @@
       <option name="presentableId" value="Default" />
       <updated>1671442244358</updated>
       <workItem from="1671442245495" duration="3996000" />
+      <workItem from="1671507204771" duration="6390000" />
     </task>
     <servers />
   </component>
@@ -150,5 +171,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BruteCollinearPoints.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
