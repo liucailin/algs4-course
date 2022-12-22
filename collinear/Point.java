@@ -121,7 +121,14 @@ public class Point implements Comparable<Point> {
     private class SlopOrder implements Comparator<Point> {
 
         public int compare(Point o1, Point o2) {
-            return (int) (slopeTo(o1) - slopeTo(o2));
+            double diff = slopeTo(o1) - slopeTo(o2);
+            if (diff > 0) {
+                return 1;
+            }
+            else if (diff < 0) {
+                return -1;
+            }
+            return o1.compareTo(o2);
         }
     }
 

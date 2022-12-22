@@ -10,11 +10,13 @@
       <change beforePath="$PROJECT_DIR$/BruteCollinearPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/BruteCollinearPoints.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FastCollinearPoints.class" beforeDir="false" afterPath="$PROJECT_DIR$/FastCollinearPoints.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FastCollinearPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/FastCollinearPoints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LineSegment.class" beforeDir="false" afterPath="$PROJECT_DIR$/LineSegment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Point$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Point$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Point$SlopOrder.class" beforeDir="false" afterPath="$PROJECT_DIR$/Point$SlopOrder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Point.class" beforeDir="false" afterPath="$PROJECT_DIR$/Point.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../percolation/.idea/checkstyle-idea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../percolation/.idea/checkstyle-idea.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../percolation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../percolation/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../queues/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../queues/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../queues/Deque.java" beforeDir="false" afterPath="$PROJECT_DIR$/../queues/Deque.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +48,9 @@
   </component>
   <component name="FormatOnSaveOptions">
     <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -95,7 +100,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/course/cs/algs4-course/collinear&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/course/cs/algs4-course/collinear&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -103,11 +108,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.BruteCollinearPoints">
+  <component name="RunManager" selected="Application.FastCollinearPoints">
     <configuration name="BruteCollinearPoints" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="BruteCollinearPoints" />
       <module name="Algorithms, Part I" />
-      <option name="PROGRAM_PARAMETERS" value="input6.txt" />
+      <option name="PROGRAM_PARAMETERS" value="input9.txt" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -115,7 +120,7 @@
     <configuration name="FastCollinearPoints" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="FastCollinearPoints" />
       <module name="Algorithms, Part I" />
-      <option name="PROGRAM_PARAMETERS" value="input8.txt" />
+      <option name="PROGRAM_PARAMETERS" value="input6.txt" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -130,6 +135,8 @@
       <updated>1671442244358</updated>
       <workItem from="1671442245495" duration="3996000" />
       <workItem from="1671507204771" duration="6390000" />
+      <workItem from="1671703484431" duration="7381000" />
+      <workItem from="1671722955680" duration="7356000" />
     </task>
     <servers />
   </component>
@@ -172,13 +179,29 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BruteCollinearPoints.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="2" />
+          <url>file://$PROJECT_DIR$/FastCollinearPoints.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/FastCollinearPoints.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

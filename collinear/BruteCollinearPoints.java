@@ -10,6 +10,7 @@ import edu.princeton.cs.algs4.StdOut;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class BruteCollinearPoints {
 
@@ -22,21 +23,35 @@ public class BruteCollinearPoints {
         int n = points.length;
         ArrayList<LineSegment> lineSegments = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                Point p = points[i];
-                Point q = points[j];
-                double slop = p.slopeTo(q);
+            Point pi = points[i];
 
-                int k = j + 1;
-                for (; k < n; k++) {
-                    double kslop = p.slopeTo(points[k]);
-                    if (kslop != slop) {
-                        break;
+            for (int j = 0; j < n; j++) {
+                Point pj = points[j];
+                if (pj.compareTo(pi) <= 0) continue;
+                double testSlop = pi.slopeTo(pj);
+
+                for (int k = 0; k < n; k++) {
+                    Point pk = points[k];
+                    if (pk.compareTo(pj) <= 0 || pi.slopeTo(pk) != testSlop) continue;
+
+                    ArrayList<Point> lpoints = new ArrayList<>();
+                    for (int l = 0; l < n; l++) {
+
+                        Point pl = points[l];
+                        if (i != l && j != l && k != l && pi.slopeTo(pl) == testSlop) {
+                            lpoints.add(pl);
+                        }
+
                     }
-                }
+                    if (lpoints.size() > 0) {
+                        Point[] ps = new Point[lpoints.size()];
+                        lpoints.toArray(ps);
+                        Arrays.sort(ps);
 
-                if (k - i >= 4) {
-                    lineSegments.add(new LineSegment(p, points[k-1]));
+                        if (ps[0].compareTo(pk) > 0) {
+                            lineSegments.add(new LineSegment(pi, ps[ps.length - 1]));
+                        }
+                    }
                 }
             }
         }
@@ -68,21 +83,18 @@ public class BruteCollinearPoints {
         StdDraw.setXscale(0, 32768);
         StdDraw.setYscale(0, 32768);
 
-
         // print and draw the line segments
-        StdDraw.setPenColor(Color.CYAN);
         BruteCollinearPoints collinear = new BruteCollinearPoints(points);
         for (LineSegment segment : collinear.segments()) {
             StdOut.println(segment);
             segment.draw();
         }
-        StdDraw.show();
-
-        StdDraw.setPenColor(Color.RED);
-        StdDraw.setPenRadius(0.01);
+        StdDraw.setPenColor(Color.magenta);
+        StdDraw.setPenRadius(0.008);
         for (Point p : points) {
             p.draw();
         }
+        StdDraw.show();
         StdDraw.show();
     }
 }

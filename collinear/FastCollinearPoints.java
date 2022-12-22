@@ -8,6 +8,7 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -22,21 +23,34 @@ public class FastCollinearPoints {
         }
         int n = points.length;
         ArrayList<LineSegment> lineSegmentArrayList = new ArrayList<>();
-        for (int i = 0; i < n - 1; i++) {
+        for (int i = 0; i < n; i++) {
             Point p = points[i];
-            Arrays.sort(points, i+1, n, p.slopeOrder());
-            Point q = points[i+1];
+            Arrays.sort(points, p.slopeOrder());
+            Point q = points[1];
             double slop = p.slopeTo(q);
-            int j = i + 2;
-            for (; j < n; j++) {
-                if (p.slopeTo(points[j]) != slop) {
-                    break;
+            int c = 0;
+            for (int k = 2; k < n; k++) {
+                Point r = points[k];
+                double rslop = p.slopeTo(r);
+                if (rslop == slop) {
+                    c++;
+                }
+                else {
+                    if (c >= 2) {
+                        LineSegment lineSegment = new LineSegment(p, points[k - 1]);
+                        lineSegmentArrayList.add(lineSegment);
+                    }
+                    c = 0;
+                    slop = rslop;
                 }
             }
-            if (j - i >= 4) {
-                LineSegment lineSegment = new LineSegment(p, points[j-1]);
+
+            if (c >= 2) {
+                LineSegment lineSegment = new LineSegment(p, points[n - 1]);
                 lineSegmentArrayList.add(lineSegment);
             }
+
+
         }
         lineSegments = new LineSegment[lineSegmentArrayList.size()];
         lineSegments = lineSegmentArrayList.toArray(lineSegments);
@@ -65,10 +79,6 @@ public class FastCollinearPoints {
         StdDraw.enableDoubleBuffering();
         StdDraw.setXscale(0, 32768);
         StdDraw.setYscale(0, 32768);
-        for (Point p : points) {
-            p.draw();
-        }
-        StdDraw.show();
 
         // print and draw the line segments
         FastCollinearPoints collinear = new FastCollinearPoints(points);
@@ -76,6 +86,12 @@ public class FastCollinearPoints {
             StdOut.println(segment);
             segment.draw();
         }
+        StdDraw.setPenColor(Color.magenta);
+        StdDraw.setPenRadius(0.008);
+        for (Point p : points) {
+            p.draw();
+        }
+        StdDraw.show();
         StdDraw.show();
     }
 }
