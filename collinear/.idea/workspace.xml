@@ -6,13 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="c1e4f978-b3bd-4ae1-84e9-9e1170bce808" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BruteCollinearPoints.class" beforeDir="false" afterPath="$PROJECT_DIR$/BruteCollinearPoints.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BruteCollinearPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/BruteCollinearPoints.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FastCollinearPoints.class" beforeDir="false" afterPath="$PROJECT_DIR$/FastCollinearPoints.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FastCollinearPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/FastCollinearPoints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Point$SlopOrder.class" beforeDir="false" afterPath="$PROJECT_DIR$/Point$SlopOrder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Point.class" beforeDir="false" afterPath="$PROJECT_DIR$/Point.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/Point.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../percolation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../percolation/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../percolation/input6.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../percolation/input6.txt" afterDir="false" />
     </list>
@@ -120,7 +115,7 @@
     <configuration name="BruteCollinearPoints" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="BruteCollinearPoints" />
       <module name="Algorithms, Part I" />
-      <option name="PROGRAM_PARAMETERS" value="input4.txt" />
+      <option name="PROGRAM_PARAMETERS" value="input8.txt" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -128,7 +123,7 @@
     <configuration name="FastCollinearPoints" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="FastCollinearPoints" />
       <module name="Algorithms, Part I" />
-      <option name="PROGRAM_PARAMETERS" value="input8.txt" />
+      <option name="PROGRAM_PARAMETERS" value="input6.txt" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -160,7 +155,7 @@
       <workItem from="1671759894612" duration="12000" />
       <workItem from="1671759952193" duration="1155000" />
       <workItem from="1671765049758" duration="3000" />
-      <workItem from="1671765162631" duration="17157000" />
+      <workItem from="1671765162631" duration="18353000" />
     </task>
     <servers />
   </component>
@@ -221,6 +216,11 @@
           <url>file://$PROJECT_DIR$/BruteCollinearPoints.java</url>
           <line>19</line>
           <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/FastCollinearPoints.java</url>
+          <line>72</line>
+          <option name="timeStamp" value="25" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

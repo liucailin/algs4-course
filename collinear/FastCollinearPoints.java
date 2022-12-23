@@ -43,7 +43,7 @@ public class FastCollinearPoints {
         lineSegments = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             Point p = source[i];
-            Arrays.sort(points, 1, n);
+            Arrays.sort(points);
             Arrays.sort(points, p.slopeOrder());
             Point q = null;
             int j = 1;
