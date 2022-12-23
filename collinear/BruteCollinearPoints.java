@@ -14,14 +14,29 @@ import java.util.Arrays;
 
 public class BruteCollinearPoints {
 
-    private LineSegment[] segments;
+    private ArrayList<LineSegment> lineSegments;
 
     public BruteCollinearPoints(Point[] points) {    // finds all line segments containing 4 points
         if (points == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("points is null");
         }
         int n = points.length;
-        ArrayList<LineSegment> lineSegments = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            if (points[i] == null) {
+                throw new IllegalArgumentException("entry in point is null: " + i);
+            }
+            for (int j = i + 1; j < n; j++) {
+                if (points[j] == null) {
+                    throw new IllegalArgumentException("entry in point is null: " + j);
+                }
+                if (points[j].slopeTo(points[i]) == Double.NEGATIVE_INFINITY) {
+                    throw new IllegalArgumentException(
+                            "entry in point is duplicate: " + i + ", " + j);
+                }
+            }
+        }
+        lineSegments = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             Point pi = points[i];
 
@@ -35,10 +50,10 @@ public class BruteCollinearPoints {
                     if (pk.compareTo(pj) <= 0 || pi.slopeTo(pk) != testSlop) continue;
 
                     ArrayList<Point> lpoints = new ArrayList<>();
-                    for (int l = 0; l < n; l++) {
+                    for (int m = 0; m < n; m++) {
 
-                        Point pl = points[l];
-                        if (i != l && j != l && k != l && pi.slopeTo(pl) == testSlop) {
+                        Point pl = points[m];
+                        if (i != m && j != m && k != m && pi.slopeTo(pl) == testSlop) {
                             lpoints.add(pl);
                         }
 
@@ -55,15 +70,15 @@ public class BruteCollinearPoints {
                 }
             }
         }
-        segments = new LineSegment[lineSegments.size()];
-        segments = lineSegments.toArray(segments);
     }
 
     public int numberOfSegments() {       // the number of line segments
-        return segments.length;
+        return lineSegments.size();
     }
 
     public LineSegment[] segments() {                // the line segments
+        LineSegment[] segments = new LineSegment[lineSegments.size()];
+        segments = lineSegments.toArray(segments);
         return segments;
     }
 

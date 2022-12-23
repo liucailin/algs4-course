@@ -14,54 +14,77 @@ import java.util.Arrays;
 
 public class FastCollinearPoints {
 
-    private LineSegment[] lineSegments;
+    private ArrayList<LineSegment> lineSegments;
 
     public FastCollinearPoints(
             Point[] points) { // finds all line segments containing 4 or more points
         if (points == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("points is null");
         }
         int n = points.length;
-        ArrayList<LineSegment> lineSegmentArrayList = new ArrayList<>();
+
         for (int i = 0; i < n; i++) {
-            Point p = points[i];
+            if (points[i] == null) {
+                throw new IllegalArgumentException("entry in point is null: " + i);
+            }
+            for (int j = i + 1; j < n; j++) {
+                if (points[j] == null) {
+                    throw new IllegalArgumentException("entry in point is null: " + j);
+                }
+                if (points[j].slopeTo(points[i]) == Double.NEGATIVE_INFINITY) {
+                    throw new IllegalArgumentException(
+                            "entry in point is duplicate: " + i + ", " + j);
+                }
+            }
+        }
+
+        Point[] source = new Point[n];
+        System.arraycopy(points, 0, source, 0, n);
+        lineSegments = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            Point p = source[i];
+            Arrays.sort(points, 1, n);
             Arrays.sort(points, p.slopeOrder());
-            Point q = points[1];
-            double slop = p.slopeTo(q);
+            Point q = null;
+            int j = 1;
             int c = 0;
-            for (int k = 2; k < n; k++) {
-                Point r = points[k];
-                double rslop = p.slopeTo(r);
-                if (rslop == slop) {
+
+            while (j < n) {
+                if (q == null) {
+                    if (points[j].compareTo(p) > 0) {
+                        q = points[j];
+                        c = 0;
+                    }
+                    j++;
+                }
+                else if (p.slopeTo(points[j]) == p.slopeTo(q)) {
                     c++;
+                    j++;
+                }
+                else if (c >= 2) {
+                    break;
                 }
                 else {
-                    if (c >= 2) {
-                        LineSegment lineSegment = new LineSegment(p, points[k - 1]);
-                        lineSegmentArrayList.add(lineSegment);
-                    }
-                    c = 0;
-                    slop = rslop;
+                    q = null;
                 }
             }
 
             if (c >= 2) {
-                LineSegment lineSegment = new LineSegment(p, points[n - 1]);
-                lineSegmentArrayList.add(lineSegment);
+                LineSegment lineSegment = new LineSegment(p, points[j - 1]);
+                lineSegments.add(lineSegment);
             }
 
-
         }
-        lineSegments = new LineSegment[lineSegmentArrayList.size()];
-        lineSegments = lineSegmentArrayList.toArray(lineSegments);
     }
 
     public int numberOfSegments() { // the number of line segments
-        return lineSegments.length;
+        return lineSegments.size();
     }
 
     public LineSegment[] segments() { // the line segments
-        return lineSegments;
+        LineSegment[] segments = new LineSegment[lineSegments.size()];
+        segments = lineSegments.toArray(segments);
+        return segments;
     }
 
     public static void main(String[] args) {
