@@ -42,35 +42,36 @@ public class FastCollinearPoints {
         System.arraycopy(points, 0, source, 0, n);
         lineSegments = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            Point p = source[i];
-            Arrays.sort(points);
-            Arrays.sort(points, p.slopeOrder());
+            Point p = points[i];
+            Arrays.sort(source);
+            Arrays.sort(source, p.slopeOrder());
             Point q = null;
             int j = 1;
             int c = 0;
 
             while (j < n) {
                 if (q == null) {
-                    if (points[j].compareTo(p) > 0) {
-                        q = points[j];
-                        c = 0;
+                    if (source[j].compareTo(p) > 0) {
+                        q = source[j];
                     }
                     j++;
                 }
-                else if (p.slopeTo(points[j]) == p.slopeTo(q)) {
+                else if (p.slopeTo(source[j]) == p.slopeTo(q)) {
                     c++;
                     j++;
                 }
-                else if (c >= 2) {
-                    break;
-                }
                 else {
+                    if (c >= 2) {
+                        LineSegment lineSegment = new LineSegment(p, source[j - 1]);
+                        lineSegments.add(lineSegment);
+                    }
                     q = null;
+                    c = 0;
                 }
             }
 
             if (c >= 2) {
-                LineSegment lineSegment = new LineSegment(p, points[j - 1]);
+                LineSegment lineSegment = new LineSegment(p, source[j - 1]);
                 lineSegments.add(lineSegment);
             }
 
