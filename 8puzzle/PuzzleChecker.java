@@ -51,4 +51,55 @@ public class PuzzleChecker {
             StdOut.println(filename + ": " + solver.moves());
         }
     }
+
+    private void debugMinPQ(int step) {
+        StringBuilder sb1 = new StringBuilder();
+        sb1.append(String.format("Step %s:\t", step));
+        StringBuilder sb2 = new StringBuilder();
+        sb2.append("\t\t");
+        StringBuilder sb3 = new StringBuilder();
+        sb3.append("\t\t");
+
+        StringBuilder[] tiles = null;
+        for (Solver.Node n :
+                minPQ) {
+            sb1.append("\tpriority  = ");
+            sb1.append(n.priority);
+
+            sb2.append("\tmoves     = ");
+            sb2.append(n.moves);
+
+            sb3.append("\tmanhattan = ");
+            sb3.append(n.manhattan);
+
+            // sb4.append(n.board.toString());
+            String[] bs = n.board.toString().split("\n");
+            if (tiles == null) {
+                tiles = new StringBuilder[bs.length];
+                for (int i = 0; i < tiles.length; i++) {
+                    tiles[i] = new StringBuilder();
+                    tiles[i].append("\t\t");
+                }
+            }
+            for (int i = 0; i < bs.length; i++) {
+                tiles[i].append("\t");
+                tiles[i].append(bs[i]);
+                tiles[i].append("\t");
+                if (i == 0)
+                    tiles[i].append("\t\t");
+            }
+        }
+
+        // System.out.printf("Step %s:", step);
+        System.out.println(sb1.toString());
+        System.out.println(sb2.toString());
+        System.out.println(sb3.toString());
+        if (tiles != null) {
+            for (StringBuilder sb :
+                    tiles) {
+                System.out.println(sb.toString());
+            }
+        }
+        System.out.println();
+    }
 }
