@@ -7,7 +7,6 @@
     <list default="true" id="c1e4f978-b3bd-4ae1-84e9-9e1170bce808" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PuzzleChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/PuzzleChecker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Solver.java" beforeDir="false" afterPath="$PROJECT_DIR$/Solver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../collinear/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../collinear/.idea/workspace.xml" afterDir="false" />
     </list>
@@ -101,10 +100,22 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.Solver">
+  <component name="RunManager" selected="Application.CollisionSystem">
     <configuration name="Board" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Board" />
       <module name="Algorithms, Part I" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CollisionSystem" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="edu.princeton.cs.algs4.CollisionSystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.princeton.cs.algs4.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -127,6 +138,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.CollisionSystem" />
         <item itemvalue="Application.Solver" />
         <item itemvalue="Application.Board" />
         <item itemvalue="Application.PuzzleChecker" />
@@ -141,7 +153,7 @@
       <option name="presentableId" value="Default" />
       <updated>1672728350851</updated>
       <workItem from="1672728352187" duration="14599000" />
-      <workItem from="1672800058637" duration="17659000" />
+      <workItem from="1672800058637" duration="23173000" />
     </task>
     <servers />
   </component>
@@ -188,9 +200,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Solver.java</url>
-          <line>57</line>
-          <option name="timeStamp" value="17" />
+          <url>jar://$PROJECT_DIR$/.lift/algs4.jar!/edu/princeton/cs/algs4/CollisionSystem.java</url>
+          <line>178</line>
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

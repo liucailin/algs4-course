@@ -5,8 +5,7 @@
  **************************************************************************** */
 
 import edu.princeton.cs.algs4.In;
-
-import java.util.ArrayList;
+import edu.princeton.cs.algs4.Queue;
 
 public class Board {
 
@@ -23,6 +22,11 @@ public class Board {
                 this.tiles[i * n + j] = (char) tiles[i][j];
             }
         }
+    }
+
+    private Board(char[] tiles, int n) {
+        this.tiles = tiles.clone();
+        this.n = n;
     }
 
 
@@ -98,79 +102,54 @@ public class Board {
     // all neighboring boards
     public Iterable<Board> neighbors() {
 
-        ArrayList<Board> neighbors = new ArrayList<>();
+        Queue<Board> neighbors = new Queue<>();
 
-        int r = 0;
-        int c = 0;
-
-        int[][] tilesCopy = new int[n][n];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                char t = tiles[i * n + j];
-                tilesCopy[i][j] = t;
-                if (t == 0) {
-                    r = i;
-                    c = j;
-                }
+        int blank = 0;
+        for (int i = 0; i < n * n; i++) {
+            if (tiles[i] == 0) {
+                blank = i;
+                break;
             }
         }
 
+        int r = blank / n, c = blank % n;
+        
+
         if (r > 0) {
-            neighbors.add(new Board(exch(tilesCopy, r, c, r - 1, c)));
-            exch(tilesCopy, r, c, r - 1, c);
+            AddNeighbor(neighbors, blank, blank - n);
         }
         if (r < n - 1) {
-            neighbors.add(new Board(exch(tilesCopy, r, c, r + 1, c)));
-            exch(tilesCopy, r, c, r + 1, c);
+            AddNeighbor(neighbors, blank, blank + n);
         }
         if (c > 0) {
-            neighbors.add(new Board(exch(tilesCopy, r, c, r, c - 1)));
-            exch(tilesCopy, r, c, r, c - 1);
+            AddNeighbor(neighbors, blank, blank - 1);
         }
         if (c < n - 1) {
-            neighbors.add(new Board(exch(tilesCopy, r, c, r, c + 1)));
-            exch(tilesCopy, r, c, r, c + 1);
+            AddNeighbor(neighbors, blank, blank + 1);
         }
 
         return neighbors;
     }
 
+    private void AddNeighbor(Queue<Board> nei, int blank, int replace) {
+        exch(tiles, blank, replace);
+        nei.enqueue(new Board(tiles, n));
+        exch(tiles, replace, blank);
+    }
 
-    private int[][] exch(int[][] a, int fi, int fj, int ti, int tj) {
-        int t = a[fi][fj];
-        a[fi][fj] = a[ti][tj];
-        a[ti][tj] = t;
-        return a;
+    private void exch(char[] a, int i, int j) {
+        char t = a[i];
+        a[i] = a[j];
+        a[j] = t;
     }
 
     // a board that is obtained by exchanging any pair of tiles
     public Board twin() {
-
-        int r1 = -1;
-        int c1 = -1;
-        int r2 = -1;
-        int c2 = -1;
-
-        int[][] tilesCopy = new int[n][n];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                char t = tiles[i * n + j];
-                tilesCopy[i][j] = t;
-                if (t != 0) {
-                    if (r1 < 0) {
-                        r1 = i;
-                        c1 = j;
-                    }
-                    else if (r2 < 0) {
-                        r2 = i;
-                        c2 = j;
-                    }
-                }
-            }
-        }
-
-        return new Board(exch(tilesCopy, r1, c1, r2, c2));
-
+        int y = (tiles[0] == 0 || tiles[1] == 0) ? n : 0;
+        exch(tiles, y, y + 1);
+        Board b = new Board(tiles, n);
+        exch(tiles, y + 1, y);
+        return b;
     }
 
     // unit testing (not graded)
