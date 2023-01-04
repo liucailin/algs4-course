@@ -6,18 +6,17 @@
 
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.MinPQ;
+import edu.princeton.cs.algs4.Stack;
 import edu.princeton.cs.algs4.StdOut;
-
-import java.util.ArrayList;
 
 public class Solver {
     // find a solution to the initial board (using the A* algorithm)
-    class Node implements Comparable<Node> {
-        public Board board;
-        public int moves;
-        public int priority;
-        public int manhattan;
-        public Node prev;
+    private class Node implements Comparable<Node> {
+        private Board board;
+        private int moves;
+        private int priority;
+        private int manhattan;
+        private Node prev;
 
         public Node(Board board, int moves, Node prev) {
             this.board = board;
@@ -27,42 +26,64 @@ public class Solver {
             priority = manhattan + moves;
         }
 
-        public int compareTo(Node o) {
-            return this.priority - o.priority;
+        public int compareTo(Node that) {
+            return this.priority - that.priority;
         }
     }
 
 
-    private MinPQ<Node> minPQ;
-    private ArrayList<Board> solution;
+    private Stack<Board> solutionStack = new Stack<>();
     private boolean isSolvable;
+    private int moves = -1;
 
     public Solver(Board initial) {
         if (initial == null) throw new IllegalArgumentException("Initial board can not be null");
-        solution = new ArrayList<>();
-        minPQ = new MinPQ<>();
-        minPQ.insert(new Node(initial, 0, null));
+        MinPQ<Node> searchPQ = new MinPQ<>();
+        searchPQ.insert(new Node(initial, 0, null));
 
-        int step = 0;
-        while (!minPQ.isEmpty()) {
-            debugMinPQ(step);
-            Node min = minPQ.delMin();
-            solution.add(min.board);
-            if (min.board.isGoal()) {
+        MinPQ<Node> twinPQ = new MinPQ<>();
+        twinPQ.insert(new Node(initial.twin(), 0, null));
+
+        while (!searchPQ.isEmpty() && !twinPQ.isEmpty()) {
+            // debugMinPQ(step, minPQ);
+            Node searchNode = searchPQ.delMin();
+
+            if (searchNode.board.isGoal()) {
                 isSolvable = true;
+                moves = searchNode.moves;
+
+                Node p = searchNode;
+                while (p != null) {
+                    solutionStack.push(p.board);
+                    p = p.prev;
+                }
+
                 break;
             }
-            step++;
+
+            Node twinNode = twinPQ.delMin();
+            if (twinNode.board.isGoal()) {
+                isSolvable = false;
+                break;
+            }
+
             for (Board b :
-                    min.board.neighbors()) {
-                if (min.prev == null || !b.equals(min.prev.board)) {
-                    minPQ.insert(new Node(b, step, min));
+                    searchNode.board.neighbors()) {
+                if (searchNode.prev == null || !b.equals(searchNode.prev.board)) {
+                    searchPQ.insert(new Node(b, searchNode.moves + 1, searchNode));
+                }
+            }
+
+            for (Board b :
+                    twinNode.board.neighbors()) {
+                if (twinNode.prev == null || !b.equals(twinNode.prev.board)) {
+                    twinPQ.insert(new Node(b, twinNode.moves + 1, twinNode));
                 }
             }
         }
     }
 
-    private void debugMinPQ(int step) {
+    private void debugMinPQ(int step, MinPQ<Node> minPQ) {
         StringBuilder sb1 = new StringBuilder();
         sb1.append(String.format("Step %s:\t", step));
         StringBuilder sb2 = new StringBuilder();
@@ -120,15 +141,14 @@ public class Solver {
 
     // min number of moves to solve initial board; -1 if unsolvable
     public int moves() {
-        if (isSolvable) {
-            return solution.size() - 1;
-        }
-        return -1;
+        return moves;
     }
 
     // sequence of boards in a shortest solution; null if unsolvable
     public Iterable<Board> solution() {
-        return solution;
+        if (isSolvable)
+            return solutionStack;
+        return null;
     }
 
     // test client (see below)
@@ -150,9 +170,12 @@ public class Solver {
             StdOut.println("No solution possible");
         else {
             StdOut.println("Minimum number of moves = " + solver.moves());
-            for (Board board : solver.solution())
+            int s = 0;
+            for (Board board : solver.solution()) {
                 StdOut.println(board);
-            StdOut.println("Minimum number of moves = " + solver.moves());
+                s++;
+            }
+            StdOut.println("Solution size = " + s);
         }
     }
 }

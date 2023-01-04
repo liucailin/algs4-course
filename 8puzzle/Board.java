@@ -10,25 +10,30 @@ import java.util.ArrayList;
 
 public class Board {
 
-    private int dimension;
-    private int[][] tiles;
+    private int n;
+    private char[] tiles;
 
     // create a board from an n-by-n array of tiles,
     // where tiles[row][col] = tile at (row, col)
     public Board(int[][] tiles) {
-        dimension = tiles.length;
-        this.tiles = copy(tiles);
+        n = tiles.length;
+        this.tiles = new char[n * n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                this.tiles[i * n + j] = (char) tiles[i][j];
+            }
+        }
     }
 
 
     // string representation of this board
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(dimension);
+        sb.append(n);
         sb.append("\n");
-        for (int i = 0; i < dimension; i++) {
-            for (int j = 0; j < dimension; j++) {
-                sb.append(String.format("%2d ", tiles[i][j]));
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                sb.append(String.format("%2d ", (int) tiles[i * n + j]));
             }
             sb.append("\n");
         }
@@ -37,21 +42,17 @@ public class Board {
 
     // board dimension n
     public int dimension() {
-        return dimension;
+        return n;
     }
 
     // number of tiles out of place
     public int hamming() {
-        int k = 0;
         int h = 0;
-        for (int i = 0; i < dimension; i++) {
-            for (int j = 0; j < dimension; j++) {
-                int t = tiles[i][j];
-                k++;
-                if (t != 0 && t != k) {
-                    h++;
-                }
-            }
+
+        for (int i = 0; i < n * n; i++) {
+            char t = tiles[i];
+            if (t == 0) continue;
+            if (t != i + 1) h++;
         }
 
         return h;
@@ -61,13 +62,13 @@ public class Board {
     public int manhattan() {
         int k = 0;
         int h = 0;
-        for (int i = 0; i < dimension; i++) {
-            for (int j = 0; j < dimension; j++) {
-                int t = tiles[i][j];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                char t = tiles[i * n + j];
                 k++;
                 if (t != 0 && t != k) {
-                    int dh = (t - 1) / dimension - i;
-                    int dv = (t - 1) % dimension - j;
+                    int dh = (t - 1) / n - i;
+                    int dv = (t - 1) % n - j;
                     h += Math.abs(dh) + Math.abs(dv);
                 }
             }
@@ -87,11 +88,9 @@ public class Board {
         if (other == null) return false;
         if (other.getClass() != this.getClass()) return false;
         Board that = (Board) other;
-        if (this.dimension != that.dimension) return false;
-        for (int i = 0; i < this.dimension; i++) {
-            for (int j = 0; j < this.dimension; j++) {
-                if (this.tiles[i][j] != that.tiles[i][j]) return false;
-            }
+        if (this.n != that.n) return false;
+        for (int i = 0; i < this.n * this.n; i++) {
+            if (this.tiles[i] != that.tiles[i]) return false;
         }
         return true;
     }
@@ -101,22 +100,41 @@ public class Board {
 
         ArrayList<Board> neighbors = new ArrayList<>();
 
-        for (int i = 0; i < dimension; i++) {
-            for (int j = 0; j < dimension; j++) {
-                if (tiles[i][j] == 0) {
+        int r = 0;
+        int c = 0;
 
-                    if (i > 0) neighbors.add(new Board(exch(copy(tiles), i, j, i - 1, j)));
-                    if (i < dimension - 1)
-                        neighbors.add(new Board(exch(copy(tiles), i, j, i + 1, j)));
-                    if (j > 0) neighbors.add(new Board(exch(copy(tiles), i, j, i, j - 1)));
-                    if (j < dimension - 1)
-                        neighbors.add(new Board(exch(copy(tiles), i, j, i, j + 1)));
-                    break;
+        int[][] tilesCopy = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                char t = tiles[i * n + j];
+                tilesCopy[i][j] = t;
+                if (t == 0) {
+                    r = i;
+                    c = j;
                 }
             }
         }
+
+        if (r > 0) {
+            neighbors.add(new Board(exch(tilesCopy, r, c, r - 1, c)));
+            exch(tilesCopy, r, c, r - 1, c);
+        }
+        if (r < n - 1) {
+            neighbors.add(new Board(exch(tilesCopy, r, c, r + 1, c)));
+            exch(tilesCopy, r, c, r + 1, c);
+        }
+        if (c > 0) {
+            neighbors.add(new Board(exch(tilesCopy, r, c, r, c - 1)));
+            exch(tilesCopy, r, c, r, c - 1);
+        }
+        if (c < n - 1) {
+            neighbors.add(new Board(exch(tilesCopy, r, c, r, c + 1)));
+            exch(tilesCopy, r, c, r, c + 1);
+        }
+
         return neighbors;
     }
+
 
     private int[][] exch(int[][] a, int fi, int fj, int ti, int tj) {
         int t = a[fi][fj];
@@ -125,20 +143,34 @@ public class Board {
         return a;
     }
 
-    private int[][] copy(int[][] src) {
-        int n = src.length;
-        int[][] dest = new int[n][n];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                dest[i][j] = src[i][j];
-            }
-        }
-        return dest;
-    }
-
     // a board that is obtained by exchanging any pair of tiles
     public Board twin() {
-        return null;
+
+        int r1 = -1;
+        int c1 = -1;
+        int r2 = -1;
+        int c2 = -1;
+
+        int[][] tilesCopy = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                char t = tiles[i * n + j];
+                tilesCopy[i][j] = t;
+                if (t != 0) {
+                    if (r1 < 0) {
+                        r1 = i;
+                        c1 = j;
+                    }
+                    else if (r2 < 0) {
+                        r2 = i;
+                        c2 = j;
+                    }
+                }
+            }
+        }
+
+        return new Board(exch(tilesCopy, r1, c1, r2, c2));
+
     }
 
     // unit testing (not graded)
@@ -157,6 +189,7 @@ public class Board {
         System.out.println(initial);
         System.out.println("hamming: " + initial.hamming());
         System.out.println("manhattan:" + initial.manhattan());
+        System.out.println("twin:" + initial.twin());
         System.out.println("neighbors:");
         for (Board b : initial.neighbors()) {
             System.out.println(b);
