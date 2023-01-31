@@ -7,6 +7,7 @@
 import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.RectHV;
 import edu.princeton.cs.algs4.StdDraw;
+import edu.princeton.cs.algs4.StdOut;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class KdTree {
 
     private Node root;
     private int size;
+    private Node closest;
 
     private static class Node {
         private Point2D p;
@@ -37,19 +39,21 @@ public class KdTree {
     }
 
     public int size() {
-        return 0;
+        return size;
     }
 
     public void insert(Point2D p) {
-        if (root == null)
+        if (p == null) throw new IllegalArgumentException();
+        if (root == null) {
             root = new Node(p, new RectHV(0, 0, 1, 1));
-        else
-            insert(root, p, 0);
+            size++;
+        }
+        else if (insert(root, p, 0)) size++;
     }
 
-    private void insert(Node n, Point2D p, int level) {
+    private boolean insert(Node n, Point2D p, int level) {
 
-        if (p.equals(n.p)) return;
+        if (p.equals(n.p)) return false;
 
         boolean left;
         boolean xorder = level % 2 == 0;
@@ -65,7 +69,7 @@ public class KdTree {
                     n.lb = new Node(p, new RectHV(pr.xmin(), pr.ymin(), pr.xmax(), n.p.y()));
             }
             else {
-                insert(n.lb, p, level + 1);
+                return insert(n.lb, p, level + 1);
             }
         }
         else {
@@ -77,13 +81,16 @@ public class KdTree {
                     n.rt = new Node(p, new RectHV(pr.xmin(), n.p.y(), pr.xmax(), pr.ymax()));
             }
             else {
-                insert(n.rt, p, level + 1);
+                return insert(n.rt, p, level + 1);
             }
         }
+
+        return true;
     }
 
 
     public boolean contains(Point2D p) {
+        if (p == null) throw new IllegalArgumentException();
         return contains(root, p, 0);
     }
 
@@ -130,6 +137,7 @@ public class KdTree {
     }
 
     public Iterable<Point2D> range(RectHV rect) {
+        if (rect == null) throw new IllegalArgumentException("called range() with a null key");
         ArrayList<Point2D> points = new ArrayList<>();
         range(rect, points, root);
         return points;
@@ -144,22 +152,20 @@ public class KdTree {
         range(rect, points, n.rt);
     }
 
-    private Node closest;
 
     public Point2D nearest(Point2D p) {
 
+        if (p == null) throw new IllegalArgumentException("called nearest() with a null key");
+
         closest = root;
 
-        nearest(p, root);
-        return closest.p;
-
-        // Node close = root;
-        // double closed = root.p.distanceSquaredTo(p);
-
-
+        nearest(p, root, true);
+        if (closest != null)
+            return closest.p;
+        return null;
     }
 
-    private void nearest(Point2D p, Node n) {
+    private void nearest(Point2D p, Node n, boolean xcmp) {
 
         if (n == null) return;
 
@@ -168,12 +174,29 @@ public class KdTree {
         if (d < closed) {
             if (p.distanceSquaredTo(n.p) < closed)
                 closest = n;
-            nearest(p, n.lb);
-            nearest(p, n.rt);
+            Node near;
+            Node far;
+            if ((xcmp && (p.x() < n.p.x())) || (!xcmp && (p.y() < n.p.y()))) {
+                near = n.lb;
+                far = n.rt;
+            }
+            else {
+                near = n.rt;
+                far = n.lb;
+            }
+            nearest(p, near, !xcmp);
+            nearest(p, far, !xcmp);
         }
     }
 
     public static void main(String[] args) {
+        KdTree kdTree = new KdTree();
+        kdTree.insert(new Point2D(1, 0.25));
+        kdTree.insert(new Point2D(0.75, 1));
+        kdTree.insert(new Point2D(1, 0.5));
+        kdTree.insert(new Point2D(0, 0));
+        kdTree.insert(new Point2D(1, 0.5));
 
+        StdOut.println(kdTree.size());
     }
 }

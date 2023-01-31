@@ -43,6 +43,7 @@ public class PointSET {
 
     public Iterable<Point2D> range(RectHV rect) {
 
+        if (rect == null) throw new IllegalArgumentException("called range() with a null key");
         ArrayList<Point2D> points = new ArrayList<>();
         for (Point2D p : set) {
             if (rect.contains(p)) {
@@ -54,8 +55,9 @@ public class PointSET {
 
     public Point2D nearest(Point2D p) {
 
+        if (p == null) throw new IllegalArgumentException("called nearest() with a null key");
         Point2D result = null;
-        double min = Double.MAX_VALUE;
+        double min = Double.POSITIVE_INFINITY;
         for (Point2D point : set) {
             double d = p.distanceSquaredTo(point);
             if (d < min) {
