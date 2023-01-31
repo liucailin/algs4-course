@@ -5,18 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c1e4f978-b3bd-4ae1-84e9-9e1170bce808" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BruteCollinearPoints.class" beforeDir="false" afterPath="$PROJECT_DIR$/BruteCollinearPoints.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BruteCollinearPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/BruteCollinearPoints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FastCollinearPoints.class" beforeDir="false" afterPath="$PROJECT_DIR$/FastCollinearPoints.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FastCollinearPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/FastCollinearPoints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Point$SlopOrder.class" beforeDir="false" afterPath="$PROJECT_DIR$/Point$SlopOrder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Point.class" beforeDir="false" afterPath="$PROJECT_DIR$/Point.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/Point.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../percolation/.idea/checkstyle-idea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../percolation/.idea/checkstyle-idea.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../percolation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../percolation/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../queues/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../queues/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../queues/Deque.java" beforeDir="false" afterPath="$PROJECT_DIR$/../queues/Deque.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kdtree/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../kdtree/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kdtree/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../kdtree/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kdtree/Algorithms, Part I.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../kdtree/Algorithms, Part I.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,6 +128,7 @@
       <workItem from="1671507204771" duration="6390000" />
       <workItem from="1671703484431" duration="7381000" />
       <workItem from="1671722955680" duration="7356000" />
+      <workItem from="1675072127194" duration="27000" />
     </task>
     <servers />
   </component>
