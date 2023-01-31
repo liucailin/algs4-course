@@ -16,7 +16,6 @@ public class KdTree {
 
     private Node root;
     private int size;
-    private Node closest;
 
     private static class Node {
         private Point2D p;
@@ -156,24 +155,20 @@ public class KdTree {
     public Point2D nearest(Point2D p) {
 
         if (p == null) throw new IllegalArgumentException("called nearest() with a null key");
-
-        closest = root;
-
-        nearest(p, root, true);
-        if (closest != null)
-            return closest.p;
-        return null;
+        if (root == null) return null;
+        return nearest(p, root.p, root, true);
     }
 
-    private void nearest(Point2D p, Node n, boolean xcmp) {
+    private Point2D nearest(Point2D p, Point2D c, Node n, boolean xcmp) {
 
-        if (n == null) return;
+        Point2D closest = c;
+        if (n == null) return closest;
 
         double d = n.rect.distanceSquaredTo(p);
-        double closed = p.distanceSquaredTo(closest.p);
+        double closed = p.distanceSquaredTo(closest);
         if (d < closed) {
             if (p.distanceSquaredTo(n.p) < closed)
-                closest = n;
+                closest = n.p;
             Node near;
             Node far;
             if ((xcmp && (p.x() < n.p.x())) || (!xcmp && (p.y() < n.p.y()))) {
@@ -184,9 +179,11 @@ public class KdTree {
                 near = n.rt;
                 far = n.lb;
             }
-            nearest(p, near, !xcmp);
-            nearest(p, far, !xcmp);
+            closest = nearest(p, closest, near, !xcmp);
+            closest = nearest(p, closest, far, !xcmp);
         }
+
+        return closest;
     }
 
     public static void main(String[] args) {
